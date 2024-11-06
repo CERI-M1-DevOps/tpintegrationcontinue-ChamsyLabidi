@@ -107,39 +107,44 @@ public class ListeSimple {
     }
 
     public Noeud getPrecedent(Noeud r) {
-    // la liste n'est pas vide puisqu'on transmet un Node de la liste et le Node existe obligatoirement
+        if (r == tete) {
+            return null;
+        }
         Noeud precedent = tete;
         Noeud courant = precedent.getSuivant();
-        while (courant != r) {
+        while (courant != null && courant != r) {
             precedent = courant;
             courant = courant.getSuivant();
         }
-        return precedent;
-    }
+        if (courant == r) {
+            return precedent;
+        } else {
+            return null;
+        }
+    }    
 
     public void echanger(Noeud r1, Noeud r2) {
-        if (r1 == r2)
-            return;
-        Noeud precedentR1;
-        Noeud precedentR2;
-        if (r1 != tete) {
-            precedentR1 = getPrecedent(r1);
-            precedentR2 = getPrecedent(r2);
+        if (r1 == r2) return;
+    
+        Noeud precedentR1 = getPrecedent(r1);
+        Noeud precedentR2 = getPrecedent(r2);
+    
+        if (precedentR1 != null) {
             precedentR1.setSuivant(r2);
-            precedentR2.setSuivant(r1);
-        } else if (r1 == tete) {
-            precedentR2 = getPrecedent(r2);
-            precedentR2.setSuivant(tete);
+        } else {
             tete = r2;
         }
-        else {
-            precedentR1 = getPrecedent(r1);
-            precedentR1.setSuivant(tete);
+    
+        if (precedentR2 != null) {
+            precedentR2.setSuivant(r1);
+        } else {
             tete = r1;
         }
-        Noeud temp = r2.getSuivant();
-        r2.setSuivant(r1.getSuivant());
-        r1.setSuivant(temp);
+    
+        Noeud temp = r1.getSuivant();
+        r1.setSuivant(r2.getSuivant());
+        r2.setSuivant(temp);
     }
+    
 
 }
