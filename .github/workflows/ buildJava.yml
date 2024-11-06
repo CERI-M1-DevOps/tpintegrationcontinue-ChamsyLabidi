@@ -20,4 +20,6 @@ jobs:
           distribution: 'corretto'
       
       - name: Build and test with Maven # Étape 3 : Construire le package et exécuter les tests
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=$(echo ${{ github.repository }} | sed 's-/-_-')
