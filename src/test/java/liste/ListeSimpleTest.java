@@ -64,6 +64,23 @@ class ListeSimpleTest {
     }
 
     @Test
+    void modifiePremierListeVide() {
+        listeATester.modifiePremier(2, 4);
+        assertNull(listeATester.tete);
+        assertEquals(0, listeATester.getSize());
+    }
+
+    @Test
+    void modifiePremierElementNonExistant() {
+        listeATester.ajout(1);
+        listeATester.ajout(3);
+        listeATester.ajout(5);
+        listeATester.modifiePremier(2, 4); // Element '2' is not in the list
+        assertEquals("ListeSimple(Noeud(5), Noeud(3), Noeud(1))", listeATester.toString());
+        assertEquals(3, listeATester.getSize());
+    }
+
+    @Test
     void modifieTous() {
         listeATester.ajout(1);
         listeATester.ajout(2);
