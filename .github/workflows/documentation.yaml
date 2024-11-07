@@ -1,8 +1,7 @@
 name: Generate and deploy documentation
 
 on:
-  pull_request:
-    types: [closed]
+  push:
 
 jobs:
   build:
